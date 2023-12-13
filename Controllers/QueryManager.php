@@ -1,6 +1,6 @@
 <?php
 
-require_once('../config/config.php');
+require_once('./config/config.php');
 
 class QueryManager
 {
@@ -13,20 +13,22 @@ class QueryManager
     {
         $req = "SELECT * FROM Courses WHERE DepartmentID = :departmentID";
         $x = $this->pdo->prepare($req);
-        $e = $x->prepare($req);
+        $x->bindParam(':departmentID', $departmentID, PDO::PARAM_INT);
+        $e = $x->execute();
         if ($e) {
-            echo "res(200)";
+            return $x->fetchAll(PDO::FETCH_ASSOC);
         } else {
-            echo "err";
+            echo "Error";
         }
     }
     public function findHighestGrade($studentID)
     {
         $req = "SELECT MAX(Grade) as HighestGrade, MIN(Grade) as LowestGrade FROM Registrations WHERE StudentID = :studentID";
         $x = $this->pdo->prepare($req);
-        $e = $x->prepare($req);
+        $x->bindParam(':studentID', $studentID, PDO::PARAM_INT);
+        $e = $x->execute();
         if ($e) {
-            echo "res(200)";
+            return $x->fetchAll(PDO::FETCH_ASSOC);
         } else {
             echo "err";
         }
@@ -37,9 +39,10 @@ class QueryManager
         INNER JOIN Registrations ON Courses.CourseID = Registrations.CourseID
         WHERE Registrations.StudentID = :studentID";
         $x = $this->pdo->prepare($req);
-        $e = $x->prepare($req);
+        $x->bindParam(':studentID', $studentID, PDO::PARAM_INT);
+        $e = $x->execute();
         if ($e) {
-            echo "res(200)";
+            return $x->fetchAll(PDO::FETCH_ASSOC);
         } else {
             echo "err";
         }
@@ -47,12 +50,13 @@ class QueryManager
     public function getStudentByCourse($courseID)
     {
         $req = "SELECT Students.* FROM Students
-        INNER JOIN Registrations ON Students.StudentID = Refistrations.StudentID
+        INNER JOIN Registrations ON Students.StudentID = Registrations.StudentID
         WHERE Registrations.CourseID = :courseID";
         $x = $this->pdo->prepare($req);
-        $e = $x->prepare($req);
+        $x->bindParam(':courseID', $courseID, PDO::PARAM_INT);
+        $e = $x->execute();
         if ($e) {
-            echo "res(200)";
+            return $x->fetchAll(PDO::FETCH_ASSOC);
         } else {
             echo "err";
         }
@@ -62,27 +66,27 @@ class QueryManager
         $req = "SELECT Professors.*,COUNT(Courses.CourseID) as CourseCount FROM Professors
         INNER JOIN Courses ON Professors.ProfessorID = Courses.ProfessorID
         GROUP BY Professors.ProfessorID
-        ORDER BY CourseCount DEC
+        ORDER BY CourseCount DESC
         LIMIT 1";
         $x = $this->pdo->prepare($req);
-        $e = $x->prepare($req);
+        $e = $x->execute();
         if ($e) {
-            echo "res(200)";
+            return $x->fetchAll(PDO::FETCH_ASSOC);
         } else {
             echo "err";
         }
     }
     public function generateRegistrationReport()
     {
-        $req = "SELECT Students.FirstName, Students.LastName, Courses.CourseName, Regisrations.Grade
+        $req = "SELECT Students.FirstName, Students.LastName, Courses.CourseName, Registrations.Grade
         FROM Students
         INNER JOIN Registrations ON Students.StudentID = Registrations.StudentID
         INNER JOIN Courses ON Registrations.CourseID = Courses.CourseID
         ";
         $x = $this->pdo->prepare($req);
-        $e = $x->prepare($req);
+        $e = $x->execute();
         if ($e) {
-            echo "res(200)";
+            return $x->fetchAll(PDO::FETCH_ASSOC);
         } else {
             echo "err";
         }

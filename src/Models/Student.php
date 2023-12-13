@@ -21,10 +21,11 @@ class Student
     public function addStudent($pdo)
     {
         try {
-            $req = "INSERT INTO Students (FirstName, LastName, DateOfBirth, Email, DepartmentID) 
-                    VALUES (:firstName, :lastName, :dateOfBirth, :email, :departmentID)";
+            $req = "INSERT INTO Students (StudentID, FirstName, LastName, DateOfBirth, Email, DepartmentID) 
+                    VALUES (:StudentID, :firstName, :lastName, :dateOfBirth, :email, :departmentID)";
 
             $stmt = $pdo->prepare($req);
+            $stmt->bindParam(':StudentID', $this->StudentID, PDO::PARAM_STR);
             $stmt->bindParam(':firstName', $this->FirstName, PDO::PARAM_STR);
             $stmt->bindParam(':lastName', $this->LastName, PDO::PARAM_STR);
             $stmt->bindParam(':dateOfBirth', $this->DateOfBirth, PDO::PARAM_STR);

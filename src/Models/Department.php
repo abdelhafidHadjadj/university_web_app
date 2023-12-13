@@ -32,4 +32,22 @@ class Department
             die("Error adding department: " . $e->getMessage());
         }
     }
+
+
+    public function getDepartmentID()
+    {
+        return $this->DepartmentID;
+    }
+    public function getDepartmentName()
+    {
+        return $this->DepartmentName;
+    }
+    public function getDepartmentHead()
+    {
+        return $this->DepartmentHead;
+    }
+    public function getLocation()
+    {
+        return $this->Location;
+    }
 }

@@ -1,8 +1,7 @@
 <?php
 
-require_once('../config/config.php');
 
-
+require_once('./config/config.php');
 class DataBaseManger
 {
     public static function createTables($pdo)
@@ -50,7 +49,6 @@ class DataBaseManger
             Grade INT,
             FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
             FOREIGN KEY (CourseID) REFERENCES Courses(CourseID));
-       
         ";
 
         $x = $pdo->prepare($sql);
