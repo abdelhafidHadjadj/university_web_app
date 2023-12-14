@@ -1,5 +1,4 @@
 <?php
-
 require_once('./config/config.php');
 require('./Controllers/DatabaseManager.php');
 require('./src/Models/Department.php');
@@ -10,131 +9,224 @@ require('./src/Models/Registration.php');
 require('./Controllers/QueryManager.php');
 
 DataBaseManger::createTables($pdo);
-$info = new Department(1, "IT", "CS", "BBZ");
-// $info->addDepartment($pdo);
-// $info1 = new Department(2, "AI", "CS", "USTHB");
-// $info1->addDepartment($pdo);
-// $info2 = new Department(3, "IL", "CS", "USTHB");
-// $ELN1 = new Department(4, "ES", "FEG", "USTHB");
-// $Telecom1 = new Department(5, "RT", "FEG", "USTHB");
-// $info2->addDepartment($pdo);
-// $ELN1->addDepartment($pdo);
-// $Telecom1->addDepartment($pdo);
+?>
 
-// $std1 = new Student(1, "Hadjadj", "Abdelhafid", "2001-07-08", "hafi@gmail.com", 1);
-// $std2 = new Student(2, "Hadjadj", "SiSi", "2015-12-04", "SiSi@gmail.com", 2);
-// $std3 = new Student(3, "Hadjadj", "Zako", "2004-10-31", "zako@gmail.com", 4);
-// $std4 = new Student(4, "Helali", "Meri", "2001-11-29", "meri@gmail.com", 1);
+<!DOCTYPE html>
+<html lang="en">
 
-// $std1->addStudent($pdo);
-// $std2->addStudent($pdo);
-// $std3->addStudent($pdo);
-// $std4->addStudent($pdo);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        div {
+            width: fit-content;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 0.5rem 1rem;
+            border: 1px solid black;
+            border-radius: 2px;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            margin-top: 10px;
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 2px;
+        }
+
+        input[type="submit"] {
+            border: 1px solid black;
+            border-radius: 2px;
+            padding: 0.5rem 1rem;
+            margin-top: 10px;
+            background-color: transparent;
+        }
+
+        input[type="submit"]:hover {
+            transition: 450ms;
+            background-color: black;
+            color: white;
+
+        }
+
+        button:hover {
+            transition: 450ms;
+            background-color: black;
+            color: white;
+        }
+
+        .linkBox {
+            margin: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid black;
+            border-radius: 2px;
+            color: black;
+        }
+
+        a:hover {
+            background-color: black;
+            transition: 450ms;
+            color: white;
+        }
+
+        .result-container {
+            margin: 5rem;
+        }
+
+        .contentBoxResult {
+            display: flex;
+            gap: 10rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="linkBox">
+        <a href="student.php">Add Student</a>
+        <a href="course.php">Add Course</a>
+        <a href="department.php">Add Department</a>
+        <a href="professor.php">Add Professor</a>
+        <a href="registration.php">Add Registration</a>
+    </div>
+    <div class="contentBoxResult">
 
 
+        <div>
+            <form action="" method="post" name="form1">
+                <label>Get Course By Department ID</label>
+                <input type="hidden" name="action" value="form1">
+                <input type="number" name="departmentId">
+                <input type="submit" value="Submit">
+            </form>
 
-// $prof1 = new Professor(1, "Belache", "Moh", "moh@gmail.com", 2);
-// $prof2 = new Professor(2, "zafoune", "zaf", "zaf@gmail.com", 1);
-// $prof3 = new Professor(3, "Derras", "der", "der@gmail.com", 1);
-// $prof4 = new Professor(4, "tarek", "****", "***@gmail.com", 4);
+            <form action="" method="post" name="form2">
+                <label>Find Highest Grade</label>
+                <input type="hidden" name="action" value="form2">
+                <input type="number" name="studentId">
+                <input type="submit" value="Submit">
+            </form>
 
-// $prof1->addProfessor($pdo);
-// $prof2->addProfessor($pdo);
-// $prof3->addProfessor($pdo);
-// $prof4->addProfessor($pdo);
+            <form action="" method="post" name="form3">
+                <label>Get Total Credit Hours</label>
+                <input type="hidden" name="action" value="form3">
+                <input type="number" name="studentId">
+                <input type="submit" value="Submit">
+            </form>
 
+            <form action="" method="post" name="form4">
+                <input type="hidden" name="action" value="form4">
+                <label>Get Student By Course</label>
+                <input type="number" name="courseId">
+                <input type="submit" value="Submit">
+            </form>
 
-// $course1 = new Course(1, "WEB PROG", 1, 1, 40);
-// $course2 = new Course(2, "Network", 2, 1, 80);
-// $course3 = new Course(3, "JAVA", 1, 2, 40);
-// $course4 = new Course(4, "IOT", 4, 4, 120);
-// $course5 = new Course(5, "AI", 1, 2, 90);
+            <div>
+                <form action="" method="post" name="form5">
+                    <button type="submit" name="action" value="getProfessors">Get Professors With Most Courses</button>
+                </form>
 
-// $course1->addCourse($pdo);
-// $course2->addCourse($pdo);
-// $course3->addCourse($pdo);
-// $course4->addCourse($pdo);
-// $course5->addCourse($pdo);
+                <form action="" method="post" name="form6">
+                    <button type="submit" name="action" value="generateReport">Generate Registration Report</button>
+                </form>
+            </div>
 
+        </div>
 
-// $reg1 = new Registration(1, 1, 1, "2023-12-13", 15);
-// $reg2 = new Registration(2, 2, 2, "2023-12-13", 20);
-// $reg3 = new Registration(3, 3, 1, "2023-12-13", 15);
-// $reg4 = new Registration(4, 1, 2, "2023-12-05", 15);
-// $reg5 = new Registration(5, 4, 5, "2023-12-05", 20);
+        <div class="result-container">
 
-// $reg1->addRegistration($pdo);
-// $reg2->addRegistration($pdo);
-// $reg3->addRegistration($pdo);
-// $reg4->addRegistration($pdo);
-// $reg5->addRegistration($pdo);
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $query = new QueryManager($pdo);
 
+                switch ($_POST['action']) {
+                    case 'form1':
+                        $result = $query->getCoursesByDepartment($_POST['departmentId']);
+                        $resultTitle = 'Get Course By Department ID Result';
+                        break;
 
-$query1 = new QueryManager($pdo);
-$res = $query1->getCoursesByDepartment(1);
+                    case 'form2':
+                        $result = $query->findHighestGrade($_POST['studentId']);
+                        $resultTitle = 'Find Highest Grade Result';
+                        break;
 
-if (is_array($res)) {
-    echo '<pre>';
-    print_r($res);
-    echo '</pre>';
-} else {
-    echo "err";
-}
+                    case 'form3':
+                        $result = $query->getTotalCreditHours($_POST['studentId']);
+                        $resultTitle = 'Get Total Credit Hours Result';
+                        break;
 
-$query2 = new QueryManager($pdo);
-$res2 = $query2->findHighestGrade(1);
-if (is_array($res2)) {
-    echo '<pre>';
-    print_r($res2);
-    echo '</pre>';
-} else {
-    echo "err";
-}
+                    case 'form4':
+                        $result = $query->getStudentByCourse($_POST['courseId']);
+                        $resultTitle = 'Get Student By Course Result';
+                        break;
 
+                    case 'getProfessors':
+                        $result = $query->getProfessorsWithMostCourses();
+                        $resultTitle = 'Get Professors With Most Courses Result';
+                        break;
 
+                    case 'generateReport':
+                        $result = $query->generateRegistrationReport();
+                        $resultTitle = 'Generate Registration Report Result';
+                        break;
 
-$query3 = new QueryManager($pdo);
-$res3 = $query3->getTotalCreditHours(1);
+                    default:
+                        $result = null;
+                        $resultTitle = '';
+                        break;
+                }
 
-if (is_array($res3)) {
-    echo '<pre>';
-    print_r($res3);
-    echo '</pre>';
-} else {
-    echo "err";
-}
+                if (is_array($result)) {
+                    echo '<div class="result-container">';
+                    echo '<h2>' . $resultTitle . ':</h2>';
+                    echo '<table border="1">';
+                    echo '<tr>';
+                    // Display table headers
+                    foreach ($result[0] as $key => $value) {
+                        echo '<th>' . $key . '</th>';
+                    }
+                    echo '</tr>';
+                    // Display table rows
+                    foreach ($result as $row) {
+                        echo '<tr>';
+                        foreach ($row as $value) {
+                            echo '<td>' . $value . '</td>';
+                        }
+                        echo '</tr>';
+                    }
+                    echo '</table>';
+                    echo '</div>';
+                } else {
+                    echo "Error fetching result.";
+                }
+            }
+            ?>
 
+        </div>
+    </div>
+</body>
 
-$query4 = new QueryManager($pdo);
-$res4 = $query4->getStudentByCourse(1);
-
-if (is_array($res4)) {
-    echo '<pre>';
-    print_r($res4);
-    echo '</pre>';
-} else {
-    echo "err";
-}
-
-
-$query5 = new QueryManager($pdo);
-$res5 = $query5->getProfessorsWithMostCourses();
-
-if (is_array($res5)) {
-    echo '<pre>';
-    print_r($res5);
-    echo '</pre>';
-} else {
-    echo "err";
-}
-
-$query6 = new QueryManager($pdo);
-$res6 = $query6->generateRegistrationReport();
-
-if (is_array($res6)) {
-    echo '<pre>';
-    print_r($res6);
-    echo '</pre>';
-} else {
-    echo "err";
-}
+</html>
